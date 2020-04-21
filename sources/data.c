@@ -249,8 +249,7 @@ liste initialisation(liste li){
                 compteur = 0;
 
              }
-
-            li->hist = temp;
+             li->hist = temp;
             caractere = fgetc(fichier);
 
         }
@@ -290,9 +289,7 @@ void enregistrer(liste li){
         fputc('|',fichier);
         fprintf(fichier, "%d", li->points);
         fputc('|',fichier);
-        if(li->hist != NULL)    {
-            // inserer l'historique
-            while(li->hist != NULL) {
+        while(li->hist != NULL) {
                 fprintf(fichier, "%d", li->hist->type);
                 fputc('|',fichier);
                 fputs(li->hist->date, fichier);
@@ -300,7 +297,6 @@ void enregistrer(liste li){
                 fputs(li->hist->commentaire, fichier);
                 fputc('|',fichier);
                 li->hist = li->hist->suivant;
-            }
         }
         fputc('\n', fichier);
         li = li->suivant;
