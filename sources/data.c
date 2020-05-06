@@ -1,7 +1,7 @@
 #include "data.h"
 
 
-liste ajouter_client(liste li, char * prenom1, char * nom1, char * tel1, char * adresse1, int points1){
+liste ajouter_client(liste li, char * prenom1, char * nom1, char * tel1, char * adresse1, int points1, hist hi){
 
 
     liste lli;
@@ -11,7 +11,7 @@ liste ajouter_client(liste li, char * prenom1, char * nom1, char * tel1, char * 
     lli->tel = strdup(tel1);
     lli->adresse = strdup(adresse1);
     lli->points = points1;
-    lli->hist = NULL;
+    lli->hist = hi;
     lli->suivant = li;
     return lli;
 
@@ -26,7 +26,6 @@ hist ajout_hist(hist hi, int type, char * date, char * commentaire)   {
     temp->type = type;
     temp->date = strdup(date);
     temp->commentaire = strdup(commentaire);
-
     temp->suivant = hi;
 
     return temp;
@@ -40,12 +39,13 @@ liste ajouter_historique(liste client, int type, char * commentaire)    {
         time_t timestamp = time( NULL );
         struct tm * pTime = localtime( & timestamp );
         char date[20];
-        strftime( date, 50, "%d/%m/%Y %Hh%M", pTime );
+        strftime( date, 20, "%d/%m/%Y %Hh%M", pTime );
         date[16] = '\0';
         client->hist = ajout_hist(client->hist, type, date, commentaire);
     }
 
 }
+
 
 void backspace_recherche(liste recherche[], liste rescape[], int nombreRescape) {
 
@@ -139,120 +139,33 @@ liste initialisation(liste li){
     {
 
         //on initialise la liste
-        char prenom[20], nom[20], tel[15], adresse[50], date[10], commentaire[50], caractere;
-        int points =0;
-        int type = 0;
-        int compteur = 0;
+        char * prenom, * nom, * tel, * adresse, * date, * commentaire, * token;
+        char ligne[1024];
+        int points;
+        int type;
         hist temp = NULL;
-        caractere = fgetc(fichier);
 
+        while(fgets(ligne, 1024, fichier) != NULL) {
 
-        while (caractere != EOF)
-        {
-
-
-            while (caractere != '|')
-            {
-
-                prenom[compteur] = caractere;
-                compteur ++;
-                caractere = fgetc(fichier);
-
-            }
-
-            prenom[compteur] = '\0';
-            compteur = 0;
-            caractere = fgetc(fichier);
-
-            while (caractere != '|')
-            {
-
-                nom[compteur] = caractere;
-                compteur ++;
-                caractere = fgetc(fichier);
-
-
-            }
-
-            nom[compteur] = '\0';
-            compteur = 0;
-            caractere = fgetc(fichier);
-
-
-            while (caractere != '|')
-            {
-
-                tel[compteur] = caractere;
-                compteur ++;
-                caractere = fgetc(fichier);
-            }
-
-            tel[compteur] = '\0';
-            compteur = 0;
-            caractere = fgetc(fichier);
-
-
-            while (caractere != '|')
-            {
-
-                adresse[compteur] = caractere;
-                compteur ++;
-                caractere = fgetc(fichier);
-            }
-
-            adresse[compteur] = '\0';
-            caractere = fgetc(fichier);
-            compteur = 0;
-
-            while   (caractere != '|') {
-
-                points += caractere - '0';
-                caractere = fgetc(fichier);
-
-            }
-
-            li = ajouter_client(li, prenom, nom, tel, adresse, points);
-            caractere = fgetc(fichier);
-
-            while(caractere != '\n') {
-
-                while   (caractere != '|') {
-
-                    type += caractere - '0';
-                    caractere = fgetc(fichier);
-
-                }
-
-                    caractere = fgetc(fichier);
-
-                while (caractere != '|')
-                {
-
-                    date[compteur] = caractere;
-                    compteur ++;
-                    caractere = fgetc(fichier);
-                }
-                date[compteur] = '\0';
-                caractere = fgetc(fichier);
-                compteur = 0;
-
-                while (caractere != '|')
-                {
-
-                    commentaire[compteur] = caractere;
-                    compteur ++;
-                    caractere = fgetc(fichier);
-                }
-                commentaire[compteur] = '\0';
+            prenom = strdup(strtok(ligne, "|"));
+            nom = strdup(strtok(NULL, "|"));
+            tel = strdup(strtok(NULL, "|"));
+            adresse = strdup(strtok(NULL, "|"));
+            points = atoi(strtok(NULL, "|"));
+            token = strtok(NULL, "|");
+            while(token != NULL && token[0] != '\n') {
+                type = atoi(strdup(token));
+                date = strdup(strtok(NULL, "|"));
+                commentaire = strdup(strtok(NULL, "|"));
                 temp = ajout_hist(temp, type, date, commentaire);
-                caractere = fgetc(fichier);
-                compteur = 0;
+                token = strtok(NULL, "|");
+            }
 
-             }
-             li->hist = temp;
-            caractere = fgetc(fichier);
+            li = ajouter_client(li, prenom, nom, tel, adresse, points, temp);
+            temp = NULL;
 
         }
+
 
         fclose(fichier);
         printf("Chargement réussi!");
@@ -275,10 +188,10 @@ void enregistrer(liste li){
 
     FILE* fichier = NULL;
     fichier = fopen(FICHIER,"w+");
+    int i;
 
     while (li != NULL)
     {
-
         fputs(li->prenom, fichier);
         fputc('|',fichier);
         fputs(li->nom, fichier);

@@ -454,7 +454,7 @@
 1587483638 c:\users\cyril & bros\documents\github\fichierclient\sources\accueil.h
 	"data.h"
 
-1587485268 c:\users\cyril & bros\documents\github\fichierclient\sources\data.h
+1588687250 c:\users\cyril & bros\documents\github\fichierclient\sources\data.h
 	<SDL/SDL.h>
 	<SDL/SDL_ttf.h>
 
@@ -653,19 +653,19 @@
 	"begin_code.h"
 	"close_code.h"
 
-1587409967 source:c:\users\cyril & bros\documents\github\fichierclient\sources\ajouter_client.c
+1587754326 source:c:\users\cyril & bros\documents\github\fichierclient\sources\ajouter_client.c
 	"ajouter_client.h"
 
 1587409956 c:\users\cyril & bros\documents\github\fichierclient\sources\ajouter_client.h
 	"data.h"
 
-1587483930 source:c:\users\cyril & bros\documents\github\fichierclient\sources\coiffure.c
+1587754659 source:c:\users\cyril & bros\documents\github\fichierclient\sources\coiffure.c
 	"coiffure.h"
 
 1577466636 c:\users\cyril & bros\documents\github\fichierclient\sources\coiffure.h
 	"data.h"
 
-1587487082 source:c:\users\cyril & bros\documents\github\fichierclient\sources\data.c
+1588687315 source:c:\users\cyril & bros\documents\github\fichierclient\sources\data.c
 	"data.h"
 
 1577469880 source:c:\users\cyril & bros\documents\github\fichierclient\sources\main.c

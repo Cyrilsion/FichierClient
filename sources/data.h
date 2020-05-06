@@ -44,7 +44,7 @@ enum    {TYPE, SELECTION, TEXTETYPE1, TEXTETYPE2, TEXTETYPE3, TEXTETYPE4, TEXTET
 enum    {LISTE_RECHERCHE, LISTE_RESCAPE};
 
 int notPresent(liste li, char * prenom1, char * nom1, char * adresse1);
-liste ajouter_client(liste li, char * prenom1, char * nom1, char * tel1, char * adresse1, int points1);
+liste ajouter_client(liste li, char * prenom1, char * nom1, char * tel1, char * adresse1, int points1, hist hi);
 hist ajout_hist(hist hi, int type, char * date, char * commentaire);
 liste ajouter_historique(liste client, int type, char * commentaire);
 liste ajouter_client_recherche(liste li, char * prenom1, char * nom1, char * adresse1);

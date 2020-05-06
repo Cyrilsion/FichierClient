@@ -2,61 +2,59 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="sources\ajouter_client.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="676" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="sources\data.c" open="1" top="1" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1130" topLine="12" />
-		</Cursor>
-		<Folding>
-			<Collapse line="3" />
-			<Collapse line="49" />
-			<Collapse line="75" />
-			<Collapse line="106" />
-			<Collapse line="132" />
-			<Collapse line="273" />
-			<Collapse line="310" />
-			<Collapse line="327" />
-			<Collapse line="337" />
-			<Collapse line="349" />
-		</Folding>
-	</File>
-	<File name="sources\coiffure.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="sources\coiffure.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="75" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="sources\ajouter_client.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6920" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="sources\coiffure.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1007" topLine="3" />
-		</Cursor>
-	</File>
-	<File name="sources\data.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1089" topLine="23" />
-		</Cursor>
-	</File>
-	<File name="sources\main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1565" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="sources\accueil.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="sources\accueil.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="702" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="sources\coiffure.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3167" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="sources\main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="288" topLine="9" />
+		</Cursor>
+	</File>
 	<File name="sources\accueil.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4491" topLine="74" />
+			<Cursor1 position="15407" topLine="218" />
 		</Cursor>
+		<Folding>
+			<Collapse line="228" />
+			<Collapse line="267" />
+		</Folding>
+	</File>
+	<File name="sources\data.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="580" topLine="8" />
+		</Cursor>
+	</File>
+	<File name="sources\ajouter_client.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3882" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="sources\ajouter_client.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="676" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="sources\data.c" open="1" top="1" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4238" topLine="60" />
+		</Cursor>
+		<Folding>
+			<Collapse line="49" />
+			<Collapse line="75" />
+			<Collapse line="106" />
+			<Collapse line="186" />
+		</Folding>
 	</File>
 </CodeBlocks_layout_file>

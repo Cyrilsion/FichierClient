@@ -2,8 +2,7 @@
 
 liste attendre_evenement_ajouter(SDL_Surface * ecran, SDL_Surface * surfaces_ajouter[NOMBRE_SURFACES_AJOUTER], liste li, TTF_Font * police_barre_recherche)    {
 
-
-    char saisie_prenom[20], saisie_nom[20], saisie_tel[11], saisie_ville[50];
+    char saisie[4][50];
     int champ_saisie = 0;
     drawEmptyRect(ecran, 300, 100 + champ_saisie* 100, 700, 50, 10, 170, 231);
     int i[4] = {0};
@@ -58,7 +57,7 @@ liste attendre_evenement_ajouter(SDL_Surface * ecran, SDL_Surface * surfaces_ajo
                 {
 
                     //valider
-                    li = ajouter_client(li, saisie_prenom, saisie_nom, saisie_tel, saisie_ville, 0);
+                    li = ajouter_client(li, saisie[0], saisie[1], saisie[2], saisie[3], 0, NULL);
                     return li;
 
                 }
@@ -76,45 +75,26 @@ liste attendre_evenement_ajouter(SDL_Surface * ecran, SDL_Surface * surfaces_ajo
             if((event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z ) || event.key.keysym.sym==SDLK_SEMICOLON || event.key.keysym.sym==SDLK_BACKSPACE || event.key.keysym.sym == SDLK_SPACE || (event.key.keysym.sym >= SDLK_0 && event.key.keysym.sym <= SDLK_9) || (event.key.keysym.sym >= SDLK_KP0 && event.key.keysym.sym <= SDLK_KP9))    {
 
                 caractere = caractere_saisi(event);
-                    //remplis le bon champs
-                    if (caractere == '<')    {
+                ///backspace
+                if (caractere == '<')    {
 
-                        i[champ_saisie] = i[champ_saisie] - 2;
-                        if(i[champ_saisie] < -1) i[champ_saisie] = -1;
+                    i[champ_saisie] = i[champ_saisie] - 1;
+                    if(i[champ_saisie] < 0) i[champ_saisie] = 0;
+                    saisie[champ_saisie][i[champ_saisie]] = '\0';
 
-                    }
-                    if((champ_saisie == 0 && i[0] < 19) || (champ_saisie == 1 && i[1] < 19) || (champ_saisie == 2 && i[2] < 10) || (champ_saisie == 3 && i[3] < 49))    {
-                        switch(champ_saisie)    {
-
-                        case 0:
-                            if (caractere != '<') saisie_prenom[i[0]] = caractere;
-                            saisie_prenom[i[0] + 1] = '\0';
-                            SDL_FreeSurface(surfaces_ajouter[champ_saisie + 3]);
-                            surfaces_ajouter[champ_saisie + 3] = modifier_champ_ajouter(ecran, surfaces_ajouter[champ_saisie + 3], surfaces_ajouter[CHAMPSAISIE], saisie_prenom, champ_saisie, police_barre_recherche);
-                            break;
-                        case 1:
-                            if (caractere != '<') saisie_nom[i[1]] = caractere;
-                            saisie_nom[i[1] + 1] = '\0';
-                            SDL_FreeSurface(surfaces_ajouter[champ_saisie + 3]);
-                            surfaces_ajouter[champ_saisie + 3] = modifier_champ_ajouter(ecran, surfaces_ajouter[champ_saisie + 3], surfaces_ajouter[CHAMPSAISIE], saisie_nom, champ_saisie, police_barre_recherche);
-                            break;
-                        case 2:
-                            if (caractere != '<') saisie_tel[i[2]] = caractere;
-                            saisie_tel[i[2] + 1] = '\0';
-                            SDL_FreeSurface(surfaces_ajouter[champ_saisie + 3]);
-                            surfaces_ajouter[champ_saisie + 3] = modifier_champ_ajouter(ecran, surfaces_ajouter[champ_saisie + 3], surfaces_ajouter[CHAMPSAISIE], saisie_tel, champ_saisie, police_barre_recherche);
-                            break;
-                        case 3:
-                            if (caractere != '<') saisie_ville[i[3]] = caractere;
-                            saisie_ville[i[3] + 1] = '\0';
-                            SDL_FreeSurface(surfaces_ajouter[champ_saisie + 3]);
-                            surfaces_ajouter[champ_saisie + 3] = modifier_champ_ajouter(ecran, surfaces_ajouter[champ_saisie + 3], surfaces_ajouter[CHAMPSAISIE], saisie_ville, champ_saisie, police_barre_recherche);
-                            break;
-
-                        }
-                        i[champ_saisie]++;
-                    }
                 }
+                ///si on peut encore ecrire
+                else if((champ_saisie == 0 && i[0] < 19) || (champ_saisie == 1 && i[1] < 19) || (champ_saisie == 2 && i[2] < 10) || (champ_saisie == 3 && i[3] < 29)) {
+
+                    ///on, remplit avec le caractere down
+                    if (caractere != '<') saisie[champ_saisie][i[champ_saisie]] = caractere;
+                    saisie[champ_saisie][i[champ_saisie] + 1] = '\0';
+                    i[champ_saisie]++;
+                }
+                SDL_FreeSurface(surfaces_ajouter[champ_saisie + 3]);
+                surfaces_ajouter[champ_saisie + 3] = modifier_champ_ajouter(ecran, surfaces_ajouter[champ_saisie + 3], surfaces_ajouter[CHAMPSAISIE], saisie[champ_saisie], champ_saisie, police_barre_recherche);
+
+            }
             if(event.key.keysym.sym==SDLK_DOWN || event.key.keysym.sym==SDLK_TAB)   {
 
                 drawEmptyRect(ecran, 300, 100 + champ_saisie* 100, 700, 50, 255, 255, 255);
@@ -134,7 +114,7 @@ liste attendre_evenement_ajouter(SDL_Surface * ecran, SDL_Surface * surfaces_ajo
             if(event.key.keysym.sym==SDLK_RETURN)   {
 
                 //valider
-                li = ajouter_client(li, saisie_prenom, saisie_nom, saisie_tel, saisie_ville, 0);
+                li = ajouter_client(li, saisie[0], saisie[1], saisie[2], saisie[3], 0, NULL);
                 return li;
 
             }

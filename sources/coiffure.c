@@ -3,7 +3,8 @@
 
 liste attendre_evenement_coiffure(SDL_Surface * ecran, SDL_Surface * surfaces_coiffure[NOMBRE_SURFACES_COIFFURE], liste client, TTF_Font * police_barre_recherche)    {
 
-    int i, j = 0;
+    int i = 1;
+    int j = 0;
     int selection_type = 1;
     char saisie[30];
     saisie[0] = '\0';
@@ -35,7 +36,7 @@ liste attendre_evenement_coiffure(SDL_Surface * ecran, SDL_Surface * surfaces_co
             {
 
                     //retour
-                    return NULL;
+                    return client;
 
             }
             for(i = 1; i <= 5; i++) {
@@ -53,17 +54,22 @@ liste attendre_evenement_coiffure(SDL_Surface * ecran, SDL_Surface * surfaces_co
             break;
         case SDL_KEYDOWN:
             if((((event.key.keysym.sym >= SDLK_a && event.key.keysym.sym <= SDLK_z ) || event.key.keysym.sym==SDLK_SEMICOLON  || event.key.keysym.sym == SDLK_SPACE || (event.key.keysym.sym >= SDLK_0 && event.key.keysym.sym <= SDLK_9) || (event.key.keysym.sym >= SDLK_KP0 && event.key.keysym.sym <= SDLK_KP9)) && j <30) || event.key.keysym.sym==SDLK_BACKSPACE)   {
-            caractere = caractere_saisi(event);
-            if(caractere == '<') {
-                    j = j - 2;
-                    if(j < -1) j = -1;
-            }
-            else saisie[j] = caractere;
-            saisie[j + 1] = '\0';
-            SDL_FreeSurface(surfaces_coiffure[TEXTECOMMENTAIRE1]);
-            SDL_FreeSurface(surfaces_coiffure[TEXTECOMMENTAIRE2]);
-            modifier_commentaire(ecran, surfaces_coiffure, saisie, police_barre_recherche);
-            j++;
+                caractere = caractere_saisi(event);
+                if(caractere == '<') {
+                    j --;
+                    if(j < 0) j = 0;
+                    saisie[j] = '\0';
+                }
+                else {
+                    saisie[j] = caractere;
+                    saisie[j + 1] = '\0';
+                    j++;
+                }
+
+                SDL_FreeSurface(surfaces_coiffure[TEXTECOMMENTAIRE1]);
+                SDL_FreeSurface(surfaces_coiffure[TEXTECOMMENTAIRE2]);
+                modifier_commentaire(ecran, surfaces_coiffure, saisie, police_barre_recherche);
+
             }
             if(event.key.keysym.sym==SDLK_DOWN || event.key.keysym.sym==SDLK_TAB)   {
 
@@ -84,7 +90,7 @@ liste attendre_evenement_coiffure(SDL_Surface * ecran, SDL_Surface * surfaces_co
             if(event.key.keysym.sym==SDLK_ESCAPE)   {
 
                 //retour
-                return NULL;
+                return client;
 
             }
             if(event.key.keysym.sym==SDLK_RETURN)   {
